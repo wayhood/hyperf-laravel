@@ -12,8 +12,7 @@
     },
     "autoload": {
         "files": [
-            "src/macro.php",
-            "src/__ide_helper.php"
+            "src/macro.php"
         ]
     }
 }
