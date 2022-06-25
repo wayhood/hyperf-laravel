@@ -1,0 +1,19 @@
+{
+    "name": "wayhood/hyperf-laravel",
+    "type": "library",
+    "keywords": [
+        "php",
+        "hyperf"
+    ],
+    "description": "A coroutine framework that focuses on hyperspeed and flexible, specifically use for build microservices and middlewares.",
+    "license": "Apache-2.0",
+    "require": {
+        "php": ">=8.0"
+    },
+    "autoload": {
+        "files": [
+            "src/macro.php",
+            "src/__ide_helper.php"
+        ]
+    }
+}
