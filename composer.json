@@ -17,5 +17,10 @@
         "files": [
             "file/macro.php"
         ]
+    },
+    "extra": {
+        "hyperf": {
+            "config": "Wayhood\\HyperfLaravel\\ConfigProvider"
+        }
     }
 }

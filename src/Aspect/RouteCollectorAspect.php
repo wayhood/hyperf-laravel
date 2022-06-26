@@ -4,12 +4,10 @@ namespace Wayhood\HyperfLaravel\Aspect;
 use FastRoute\DataGenerator;
 use FastRoute\RouteParser;
 use Hyperf\Di\Aop\AbstractAspect;
-use Hyperf\Di\Annotation\Aspect;
 use Hyperf\Di\Aop\ProceedingJoinPoint;
 use Hyperf\HttpServer\MiddlewareManager;
 use Hyperf\HttpServer\Router\Handler;
 
-#[Aspect]
 class RouteCollectorAspect extends AbstractAspect
 {
     public $classes = [
