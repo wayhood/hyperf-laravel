@@ -10,21 +10,21 @@ use Hyperf\HttpServer\Router\Handler;
 
 class RouteCollectorAspect extends AbstractAspect
 {
-    public $classes = [
+    public array $classes = [
         'Hyperf\HttpServer\Router\RouteCollector::addRoute',
     ];
 
     protected string $currentGroupPrefix = '';
 
     protected array $currentGroupOptions = [];
-    
+
     protected RouteParser $routeParser;
-    
+
     protected DataGenerator $dataGenerator;
-    
-    protected string $server;
-    
-    private function getProperty(\ReflectionClass $reflectionClass, string $propertyName)
+
+    protected string $server = 'http';
+
+    private function getProperty(\ReflectionClass $reflectionClass, string $propertyName, ProceedingJoinPoint $proceedingJoinPoint)
     {
         $reflectionProperty = $reflectionClass->getProperty($propertyName);
         $reflectionProperty->setAccessible(true);
@@ -35,7 +35,7 @@ class RouteCollectorAspect extends AbstractAspect
     {
         return array_merge_recursive($origin, $options);
     }
-    
+
     public function process(ProceedingJoinPoint $proceedingJoinPoint)
     {
         $httpMethod = $proceedingJoinPoint->getArguments()[0];
@@ -44,11 +44,11 @@ class RouteCollectorAspect extends AbstractAspect
         $options = $proceedingJoinPoint->getArguments()[3];
 
         $reflectionClass = new \ReflectionClass($proceedingJoinPoint->getInstance());
-        
-        $this->currentGroupPrefix = $this->getProperty($reflectionClass, 'currentGroupPrefix');
-        $this->routeParser = $this->getProperty($reflectionClass, 'routeParser');
-        $this->currentGroupOptions = $this->getProperty($reflectionClass, 'currentGroupOptions');
-        $this->dataGenerator = $this->getProperty($reflectionClass, 'dataGenerator');
+
+        $this->currentGroupPrefix = $this->getProperty($reflectionClass, 'currentGroupPrefix', $proceedingJoinPoint);
+        $this->routeParser = $this->getProperty($reflectionClass, 'routeParser', $proceedingJoinPoint);
+        $this->currentGroupOptions = $this->getProperty($reflectionClass, 'currentGroupOptions', $proceedingJoinPoint);
+        $this->dataGenerator = $this->getProperty($reflectionClass, 'dataGenerator', $proceedingJoinPoint);
 
         $route = $this->currentGroupPrefix . $route;
         $routeDataList = $this->routeParser->parse($route);
