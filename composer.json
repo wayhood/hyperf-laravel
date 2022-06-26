@@ -12,10 +12,10 @@
     },
     "autoload": {
         "psr-4": {
-            "Wayhood\\HyperfLaravel\\": "src/classes"
+            "Wayhood\\HyperfLaravel\\": "src"
         },
         "files": [
-            "src/macro.php"
+            "file/macro.php"
         ]
     }
 }
