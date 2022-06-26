@@ -1,5 +1,5 @@
 <?php
-namespace Wayhood\HyperfLaravel;
+namespace Wayhood\HyperfLaravel\Aspect;
 
 use FastRoute\DataGenerator;
 use FastRoute\RouteParser;
