@@ -38,6 +38,7 @@ class RouteCollectorAspect extends AbstractAspect
 
     public function process(ProceedingJoinPoint $proceedingJoinPoint)
     {
+        var_Dump(1111111);
         $httpMethod = $proceedingJoinPoint->getArguments()[0];
         $route = $proceedingJoinPoint->getArguments()[1];
         $handler = $proceedingJoinPoint->getArguments()[2];
@@ -53,13 +54,16 @@ class RouteCollectorAspect extends AbstractAspect
         $route = $this->currentGroupPrefix . $route;
         $routeDataList = $this->routeParser->parse($route);
         $newRouteDataList = [];
-
         foreach($routeDataList as $routeData) {
             if (count($routeData) == 1) {
                 $newRouteDataList[] = $routeData;
                 if (str_ends_with($routeData[0], '/')) {
                     $newRouteDataList[] = [rtrim($routeData[0], '/')];
                 }
+            } else if ($routeData[count($routeData)-1] === '/') {
+                $newRouteDataList[] = $routeData;
+                unset($routeData[count($routeData)-1]);
+                $newRouteDataList[] = $routeData;
             } else {
                 $newRouteDataList[] = $routeData;
             }
