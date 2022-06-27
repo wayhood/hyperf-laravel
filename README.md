@@ -4,6 +4,12 @@
 ## 环境
 php8+
 
+## 安装 使用php8
+
+```
+composer require wayhood/hyperf-laravel
+```
+
 ## 适配
 `Hyperf\HttpServer\Request` `Hyperf\HttpServer\Contract\RequestInterface`
 
@@ -32,4 +38,4 @@ Route::get('/api/test/{a}/{b}/[{c}]', function($a, $b, $c=null) {
 * http://localhost:9501/api/test/a/b/c is ok
 * http://localhost:9501/api/test/a/b/ is ok
 * http://localhost:9501/api/test/a/b is ok 默认hyperf不支持
-```
+
