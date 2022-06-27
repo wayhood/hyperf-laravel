@@ -15,15 +15,33 @@ if (! function_exists('response')) {
      */
     function response(mixed $content = '', $status = 200, array $headers = []): ResponseInterface
     {
-        $data = $result = Json::encode($content);
+
         /** @var ResponseInterface $response */
         $response = Context::get(ResponseInterface::class);
-
         $response = $response->withStatus($status);
+        $format = 'plain';
+
         foreach ($headers as $key => $value) {
             $response = $response->withAddedHeader(strtolower($key), $value);
+            if (strtolower($key) === 'content-type' && str_contains("application/xml")) {
+                $format = 'xml';
+            }
         }
-        $response = $response->withAddedHeader('content-type', 'application/json; charset=utf-8');
+
+        if (is_string($content)) {
+            $format = 'plain';
+            $data = $content;
+        }
+
+        if ($format != 'xml' && is_array($content) && is_object($content)) {
+            $format = 'json';
+            $response = $response->withAddedHeader('content-type', 'application/json; charset=utf-8');
+        }
+
+        if ($format != 'plain') {
+            $data = Json::encode($content);
+        }
+
         return $response->withBody(new SwooleStream($data));
     }
 }
