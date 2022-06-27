@@ -38,7 +38,6 @@ class RouteCollectorAspect extends AbstractAspect
 
     public function process(ProceedingJoinPoint $proceedingJoinPoint)
     {
-        var_Dump(1111111);
         $httpMethod = $proceedingJoinPoint->getArguments()[0];
         $route = $proceedingJoinPoint->getArguments()[1];
         $handler = $proceedingJoinPoint->getArguments()[2];
