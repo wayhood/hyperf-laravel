@@ -15,7 +15,8 @@
             "Wayhood\\HyperfLaravel\\": "src"
         },
         "files": [
-            "file/macro.php"
+          "file/macros.php",
+          "file/helpers.php"
         ]
     },
     "extra": {
