@@ -36,10 +36,14 @@ if (! function_exists('response')) {
         if ($format != 'xml' && is_array($content) && is_object($content)) {
             $format = 'json';
             $response = $response->withAddedHeader('content-type', 'application/json; charset=utf-8');
+        } else {
+            $response = $response->withAddedHeader('content-type', 'application/xml; charset=utf-8');
         }
 
         if ($format != 'plain') {
             $data = Json::encode($content);
+        } else {
+            $response = $response->withAddedHeader('content-type', 'text/plain; charset=utf-8');
         }
 
         return $response->withBody(new SwooleStream($data));
