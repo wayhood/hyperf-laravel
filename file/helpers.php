@@ -1,8 +1,8 @@
 <?php
 
 use Hyperf\HttpMessage\Stream\SwooleStream;
-use Hyperf\Utils\Codec\Json;
-use Hyperf\Utils\Codec\Xml;
+use Hyperf\Codec\Json;
+use Hyperf\Codec\Xml;
 use Psr\Http\Message\ResponseInterface;
 use Hyperf\Context\Context;
 
